@@ -499,11 +499,18 @@ Call Now
 </div>
 <div class="con-f rv d1">
 <h4>Request a Free Estimate</h4>
-<div class="fr"><div class="fg"><label>First Name</label><input type="text" placeholder="John"></div><div class="fg"><label>Last Name</label><input type="text" placeholder="Smith"></div></div>
-<div class="fr"><div class="fg"><label>Phone</label><input type="tel" placeholder="(850) 555-0123"></div><div class="fg"><label>Email</label><input type="email" placeholder="you@email.com"></div></div>
-<div class="fg"><label>Service Needed</label><select><option value="">Select a service...</option><option>Painting</option><option>Repair Work</option><option>TV Mounts</option><option>Wood Floors</option><option>Yard Clean Up</option><option>Drywall</option><option>Vinyl Siding</option><option>Kitchen Remodel</option><option>Carpentry</option><option>Tile</option><option>Door/Window Install</option><option>Screen Room</option><option>Other</option></select></div>
-<div class="fg"><label>Project Details</label><textarea placeholder="Tell us about your project..."></textarea></div>
-<button class="f-btn" type="button">Get My Free Estimate</button>
+<form class="estimate-form" id="estimateForm" action="https://formsubmit.co/dulyn.wittenburg@yahoo.com" method="POST" target="_blank">
+<input type="hidden" name="_subject" value="New Wittenburg Handyman estimate request">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://www.wittenburghandyman.com/?submitted=1#contact">
+<div class="fr"><div class="fg"><label for="firstName">First Name</label><input id="firstName" name="first_name" type="text" placeholder="John" required></div><div class="fg"><label for="lastName">Last Name</label><input id="lastName" name="last_name" type="text" placeholder="Smith" required></div></div>
+<div class="fr"><div class="fg"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="(850) 555-0123" required></div><div class="fg"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@email.com" required></div></div>
+<div class="fg"><label for="serviceNeeded">Service Needed</label><select id="serviceNeeded" name="service_needed" required><option value="">Select a service...</option><option>Painting</option><option>Repair Work</option><option>TV Mounts</option><option>Wood Floors</option><option>Yard Clean Up</option><option>Drywall</option><option>Vinyl Siding</option><option>Kitchen Remodel</option><option>Carpentry</option><option>Tile</option><option>Door/Window Install</option><option>Screen Room</option><option>Other</option></select></div>
+<div class="fg"><label for="projectDetails">Project Details</label><textarea id="projectDetails" name="project_details" placeholder="Tell us about your project..." required></textarea></div>
+<button class="f-btn" type="submit">Get My Free Estimate</button>
+<div id="formStatus" style="margin-top:12px;font-size:14px;color:#6b7280;"></div>
+</form>
 </div>
 </div>
 </section>
@@ -545,6 +552,16 @@ document.querySelectorAll('.n-links a').forEach(a=>{a.addEventListener('click',(
 const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');ro.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})}); 
+
+const estimateForm=document.getElementById('estimateForm');
+if(estimateForm){
+  estimateForm.addEventListener('submit',function(){
+    const status=document.getElementById('formStatus');
+    if(status){status.textContent='Submitting... If a new tab does not open, please allow popups and try again.';}
+    setTimeout(()=>{ if(status){status.textContent='If you did not see a new tab, the browser may be blocking the form submission.';} }, 2500);
+  });
+}
+
 </script>
 </body>
 </html>
